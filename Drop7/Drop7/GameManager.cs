@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Drop7
 {
@@ -37,13 +35,20 @@ namespace Drop7
             return MyGame.CanDrop(column);
         }
 
+        public void PrintNextTileText()
+        {
+            Console.WriteLine();
+            Console.WriteLine($"The next tile to be placed is {MyGame.MyBoard.NextTile}");
+            Console.WriteLine();
+        }
+
         public void ProgressGame(int column)
         {
             if (MyGame.Progress(column))
                 EndGame();
             else
             {
-                Console.WriteLine();
+                PrintNextTileText();
                 MyGame.MyBoard.PrintBoard();
             }
         }
@@ -54,7 +59,9 @@ namespace Drop7
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine(MyGame.Score);
+            Console.WriteLine("Game over");
+            Console.WriteLine();
+            Console.WriteLine($"Final Score: {MyGame.Score}");
         }
     }
 }

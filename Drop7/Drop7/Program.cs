@@ -12,6 +12,8 @@ namespace Drop7
 
             manager.StartGame();
 
+            manager.PrintNextTileText();
+
             while (manager.InProgress)
             {
                 Console.WriteLine("-------------------------------------------------------------------");
@@ -46,6 +48,9 @@ namespace Drop7
                     }
                 }
             }
+
+            Console.Write("Press any key to end");
+            Console.Read();
         }
     }
 }

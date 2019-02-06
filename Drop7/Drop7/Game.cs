@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Drop7
+﻿namespace Drop7
 {
     public class Game
     {
@@ -11,17 +7,25 @@ namespace Drop7
             MyBoard = new Board();
         }
 
+        public int CurrentTurn { get; set; }
+        private int MaxTurn { get; set; }
+        private const int MinTurn = 5;
         public decimal Score { get; set; }
         public Board MyBoard { get; }
 
         public void Start()
         {
             Score = 0;
+            MaxTurn = 25;
+            CurrentTurn = 25;
         }
 
         public void End()
         {
-
+            // nothing to clean up, could probably re-assign some roles to make this actually do something
+            // but whatever
+            // this is for fun
+            // kind of
         }
 
         public bool CanDrop(int column)
@@ -33,12 +37,18 @@ namespace Drop7
         {
             Score += MyBoard.AddTile(column);
 
-            //CheckTurns
-            //if 25th, 24th, 23rd...
-            //  add new row to board
-            //  get score from adding row
+            if (CurrentTurn == 0)
+            {
+                if (MaxTurn > MinTurn)
+                {
+                    MaxTurn--;
+                }
+                CurrentTurn = MaxTurn;
+                Score += 7000;
+                Score += MyBoard.AddNewRow();
+            }
 
-            return MyBoard.ValidBoard();
+            return MyBoard.InvalidBoard;
         }
     }
 }
