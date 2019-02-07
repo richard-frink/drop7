@@ -38,7 +38,11 @@ namespace Drop7
         public void PrintNextTileText()
         {
             Console.WriteLine();
+            Console.WriteLine("-------------------------------------------------------------------");
+            Console.WriteLine();
             Console.WriteLine($"The next tile to be placed is {MyGame.MyBoard.NextTile}");
+            Console.WriteLine();
+            Console.WriteLine($"Your current turn is {MyGame.CurrentTurn}");
             Console.WriteLine();
         }
 

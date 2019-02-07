@@ -37,6 +37,7 @@
         {
             Score += MyBoard.AddTile(column);
 
+            CurrentTurn--;
             if (CurrentTurn == 0)
             {
                 if (MaxTurn > MinTurn)

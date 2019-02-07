@@ -26,6 +26,7 @@ namespace Drop7
             _bustedOnUpdate = false;
             InitializeTiles();
             RandomizeTiles();
+            NextTile = 0; // trigger randomization on start
         }
 
         private Random _rand { get; }
@@ -100,6 +101,7 @@ namespace Drop7
             Console.WriteLine();
         }
 
+        // 1 through 7
         public decimal AddTile(int column)
         {
             //push new tile on
@@ -307,10 +309,13 @@ namespace Drop7
                 {
                     // we will always be one ahead
                     // this is always at max == 7 because we won't ever check blank columns
-                    if (8 - r == (int)Tiles[row, col])
+                    if (6 - r == (int)Tiles[row, col])
                         return true;
-                    break;
+                    if (r != 0)
+                        break;
                 }
+                else if (r == 0 && 7 == (int)Tiles[row, col])
+                    return true;
             }
             return false;
         }
