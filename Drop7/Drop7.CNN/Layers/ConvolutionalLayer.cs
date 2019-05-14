@@ -159,7 +159,7 @@ namespace Drop7.CNN.Layers
             {
                 for (int c = 0; c < 5; c++)
                 {
-                    f12[r, c] = Math.Abs(f1[r,c] - f2[r,c]);
+                    f12[r, c] = Math.Abs(f1[r, c] - f2[r, c]);
                 }
             }
 
@@ -212,7 +212,7 @@ namespace Drop7.CNN.Layers
                     double above = f4[r, c];
                     double below = f4[r + 1, c];
 
-                    f1234[r, c] = f123[r, c] + Math.Max(above,below);
+                    f1234[r, c] = f123[r, c]*Math.Max(above,below);
                 }
             }
 

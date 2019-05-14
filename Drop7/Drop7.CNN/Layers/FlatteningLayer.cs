@@ -49,7 +49,7 @@ namespace Drop7.CNN.Layers
                 output[0, baseColumn] = Input[0, c];
 
                 // unfortunately, this can favor full columns, so we have to filter those by driving the score to be extremely undesireable
-                if (ineligibleColumns != null)
+                if (ineligibleColumns.Count > 0)
                     if (ineligibleColumns.Contains(baseColumn))
                         output[0, baseColumn] += 10000;
 
