@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Drop7
 {
@@ -46,8 +45,8 @@ namespace Drop7
             }
         }
 
-        // numbered 1-7 with 0 == cracked, -1 == unbroken, -2 == 
-        protected Tiles[,] Tiles { get; set; }
+        // needed to expose this for NN metrics
+        public Tiles[,] Tiles { get; set; }
 
         private void InitializeTiles()
         {
@@ -83,22 +82,54 @@ namespace Drop7
 
         public void PrintBoard()
         {
+            var strings = new List<string>();
+            PrintBoard(strings);
+        }
+
+        public void PrintBoard(List<string> strings)
+        {
+            string temp = "";
             for (int r = 0; r < 7; r++)
             {
-                Console.Write("{0,6}", 7 - r);
+                string row = "";
+                temp = string.Format("{0,6}", 7 - r);
+                row += temp;
+                Console.Write(temp);
                 for (int c = 0; c < 7; c++)
                 {
                     if (Tiles[r, c] != Drop7.Tiles.Empty)
-                        Console.Write("{0,5}", (int)Tiles[r, c]);
+                    {
+                        temp = string.Format("{0,5}", (int)Tiles[r, c]);
+                        Console.Write(temp);
+                        row += temp;
+                    }
                     else
-                        Console.Write("{0,5}", " ");
+                    {
+                        temp = string.Format("{0,5}", " ");
+                        Console.Write(temp);
+                        row += temp;
+                    }
                 }
-                Console.Write($"{Environment.NewLine}{Environment.NewLine}");
+                temp = $"{Environment.NewLine}{Environment.NewLine}";
+                Console.Write(temp);
+                strings.Add(row);
+                strings.Add(temp);
             }
-            Console.Write("{0,6}", "");
+            temp = string.Format("{0,6}", "");
+            Console.Write(temp);
+            strings.Add(temp);
+
+            string bottom = "";
             for (int i = 1; i < 8; i++)
-                Console.Write("{0,5}", i);
-            Console.WriteLine();
+            {
+                temp = string.Format("{0,5}", i);
+                Console.Write(temp);
+                bottom += temp;
+            }
+            temp = $"{Environment.NewLine}";
+            Console.Write(temp);
+            strings.Add(bottom);
+            strings.Add(temp);
         }
 
         // 1 through 7

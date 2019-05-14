@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Drop7
 {
@@ -66,6 +68,22 @@ namespace Drop7
             Console.WriteLine("Game over");
             Console.WriteLine();
             Console.WriteLine($"Final Score: {MyGame.Score}");
+
+            WriteToLog();
+        }
+
+        public void WriteToLog()
+        {
+            string path = @"D:\Drop7-Results\";
+            path += $"results-{DateTime.Now.ToString("yyyy-MMM-dd-HH")}.txt";
+
+            List<string> strings = new List<string>();
+            strings.Add(string.Format($"{Environment.NewLine}Begin Results"));
+            MyGame.MyBoard.PrintBoard(strings);
+            strings.Add(string.Format($"Final Score: {MyGame.Score}"));
+            strings.Add(string.Format($"End Results{Environment.NewLine}"));
+
+            File.AppendAllLines(path, strings);
         }
     }
 }
